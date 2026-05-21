@@ -1,82 +1,179 @@
-<templatestyles src="Página principal/styles.css" />
-<div class="nomobile">
-{{Página principal/Cabeçalho}}
-</div>
-<!-- PARTE UM INÍCIO -->
-<div class="main-page-responsive-columns main-page-first-row">
-<!-- ARTIGO DESTACADO INÍCIO -->
-<div>
-<div class="main-page-block-heading">Artigo em destaque</div>
-<div class="main-page-block-contents">
-{{Em destaque}}
-<!-- REDES SOCIAIS INÍCIO -->
-<div class="plainlinks hlist" style="clear:both; border-top:1px; text-align:end; font-size:95%; font-weight:bold;">
-{{Redes sociais no Artigo em Destaque}}
-<span style="white-space:nowrap;">[[Wikipédia:Artigos destacados|Artigos destacados]]: [[:Categoria:!Artigos destacados|{{Número de artigos destacados}}]]</span> •
-<span style="white-space:nowrap;">[[Wikipédia:Artigos bons|Artigos bons]]: [[:Categoria:!Artigos bons|{{Número de artigos bons}}]]</span>
-</div>
-<!-- REDES SOCIAIS FIM -->
-</div>
-</div>
-<!-- ARTIGO DESTACADO FIM -->
-<!-- EVENTOS ATUAIS INÍCIO -->
-<div>
-<div class="main-page-block-heading">Eventos atuais</div>
-<div class="main-page-block-contents">
-{{Eventos atuais}}
-</div>
-</div>
-<!-- EVENTOS ATUAIS FIM -->
-</div>
-<!-- PARTE UM FIM -->
+/* Reset de Estilos Básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-<!-- PARTE DOIS INÍCIO -->
-<div class="main-page-responsive-columns main-page-second-row">
-<!-- NESTE DIA... INÍCIO -->
-<div>
-<div class="main-page-block-heading">{{CURRENTDAY}} de {{CURRENTMONTHNAME}} na história</div>
-<div class="main-page-block-contents">
-{{Wikipédia:Efemérides/{{CURRENTDAY}} de {{CURRENTMONTHNAME}}}}
-</div>
-</div>
-<!-- NESTE DIA... FIM -->
-<!-- SABIA QUE INÍCIO -->
-<div>
-<div class="main-page-block-heading">Sabia que...</div>
-<div class="main-page-block-contents">
-{{Sabia que}}
-</div>
-</div>
-<!-- SABIA QUE FIM -->
-</div>
-<!-- PARTE DOIS FIM -->
+body {
+    background-color: #f4f7f5;
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-<!-- PARTE TRÊS INÍCIO -->
-<div class="main-page main-page-third-row">
-<!-- IMAGEM DO DIA INÍCIO -->
-<div>
-<div class="main-page-block-heading">Imagem do dia</div>
-<div class="main-page-block-contents">{{Wikipédia:Imagem em destaque/{{CURRENTDAY}} de {{CURRENTMONTHNAME}} de {{CURRENTYEAR}}|min=400|max=800}}
-<!-- COMPARTILHAR IMAGEM INÍCIO -->
-<div class="plainlinks hlist" style="clear:both; border-top:1px; text-align:end; font-size:95%; font-weight:bold;">
-{{Redes sociais na Imagem do Dia}}
-<span style="white-space:nowrap;">[[Wikipédia:Imagem em destaque|Índice geral]] • [[:Commons:Commons:Imagens de qualidade|Commons]]</span></div>
-<!-- COMPARTILHAR IMAGEM FIM -->
-</div>
-</div>
-</div>
-<!-- IMAGEM DO DIA FIM -->
-<!-- SOBRE A WIKIPÉDIA INÍCIO -->
-<div class="nomobile">
-{{Página principal/Apresentação}}
-</div>
-</div>
-</div>
-<!-- SOBRE A WIKIPÉDIA FIM -->
-</div>
-<!-- PARTE TRÊS FIM -->
-<!-- RODAPÉ INÍCIO -->
-{{Página principal/Projetos irmãos}}
-<!-- RODAPÉ FIM -->
-<!-- Comandos para remover o índice e a opção de editar em seções: -->
-__NOTOC__<!-- -->__NOEDITSECTION__
+/* Cabeçalho */
+.main-header {
+    background-color: #1b4332; /* Verde Agro Escuro */
+    color: #ffffff;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border-bottom: 5px solid #d4a373; /* Tom de Terra/Palha */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #a3b18a; /* Verde Claro Folha */
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Container Principal */
+.search-container {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Caixa de Busca */
+.search-box {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid #2d6a4f;
+    margin-bottom: 1.5rem;
+}
+
+.search-box h2 {
+    color: #1b4332;
+    margin-bottom: 0.5rem;
+}
+
+.search-box p {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #2d6a4f;
+}
+
+button {
+    background-color: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1b4332;
+}
+
+/* Caixa de Resultado */
+.result-box {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.result-header {
+    background-color: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-header h3 {
+    color: #2d6a4f;
+    font-size: 1.1rem;
+}
+
+.status-badge {
+    background-color: #d8f3dc;
+    color: #1b4332;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.result-content {
+    padding: 1.5rem;
+    line-height: 1.6;
+}
+
+.result-content h4 {
+    color: #1b4332;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.result-content h4:first-child {
+    margin-top: 0;
+}
+
+/* Classes Utilitárias */
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Rodapé */
+.main-footer {
+    background-color: #1b4332;
+    color: #a3b18a;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
