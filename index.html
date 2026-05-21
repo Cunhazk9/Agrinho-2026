@@ -1,73 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriCampo - Guia de Adubos Sustentáveis</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<section class="busca-container">
+    <h2>Encontre o Adubo Ideal</h2>
+    <p>Digite o nome do adubo, características visuais (ex: pó, esferas) ou tipo (orgânico, mineral):</p>
+    <input type="text" id="campo-busca" oninput="filtrarAdubos()" placeholder="Ex: Ureia, NPK, pó branco, orgânico...">
+</section>
 
-    <header>
-        <div class="container">
-            <h1>NutriCampo <span>IA</span></h1>
-            <p>Agro Forte, Inteligente e Sustentável</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <section class="intro">
-            <h2>Guia Prático de Fertilização</h2>
-            <p>Selecione um tipo de adubo abaixo para descobrir suas características essenciais, componentes e onde ele deve ser aplicado para máxima eficiência e mínimo impacto ambiental.</p>
-        </section>
-
-        <section class="adubos-grid">
-            <div class="card" onclick="mostrarDetalhes('ureia')">
-                <h3>Ureia</h3>
-                <p>Alta concentração de Nitrogênio para crescimento rápido.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('npk')">
-                <h3>NPK (Fórmulas)</h3>
-                <p>O trio clássico: Nitrogênio, Fósforo e Potássio.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('organico')">
-                <h3>Adubo Orgânico</h3>
-                <p>Sustentabilidade pura: Esterco e Compostagem.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('calcario')">
-                <h3>Calcário</h3>
-                <p>Corretivo de solo para reduzir a acidez.</p>
-                <button>Ver Detalhes</button>
-            </div>
-        </section>
-
-        <section id="painel-detalhes" class="detalhes hidden">
-            <div class="detalhes-conteudo">
-                <h2 id="detalhe-nome">Nome do Adubo</h2>
-                <hr>
-                <div class="info-block">
-                    <h3>🌱 Características:</h3>
-                    <p id="detalhe-caracteristicas">Informações sobre as propriedades do adubo.</p>
-                </div>
-                <div class="info-block">
-                    <h3>🚜 Onde e Como Usar:</h3>
-                    <p id="detalhe-uso">Instruções de aplicação no campo ou jardim.</p>
-                </div>
-                <button onclick="fecharDetalhes()" class="btn-fechar">Fechar Detalhes</button>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 NutriCampo - Projeto Agrinho Programação.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<section id="lista-resultados" class="grid-resultados">
+    </section>
