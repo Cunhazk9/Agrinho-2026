@@ -3,74 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroCerto IA - Consulta Instantânea de Insumos</title>
+    <title>AgroConsultas | Inteligência Artificial do Campo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Cabeçalho Principal -->
     <header class="main-header">
-        <div class="container header-flex">
-            <div class="logo">
-                <h1>AgroCerto <span>IA</span></h1>
-            </div>
-            <p class="tagline">🌱 Produtividade Forte, Consciência Sustentável</p>
+        <div class="logo">
+            <span class="icon">🌱</span>
+            <h1>Agro<span>Consultas</span></h1>
         </div>
+        <p>A inteligência do campo na velocidade que sua lavoura precisa.</p>
     </header>
 
-    <main class="container">
-        
-        <section class="search-section" aria-labelledby="search-title">
-            <h2 id="search-title">O que você vai aplicar no campo hoje?</h2>
-            <p>Digite o nome do adubo ou insumo agrícola para receber recomendações ecológicas e técnicas instantâneas da nossa inteligência.</p>
+    <!-- Conteúdo Principal -->
+    <main class="search-container">
+        <section class="search-box">
+            <h2>Consulte seu Insumo ou Adubo</h2>
+            <p>Digite o nome do produto para receber recomendações e análises imediatas da nossa IA.</p>
             
-            <div class="search-box">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    placeholder="Ex: Ureia, NPK 10-10-10, Calcário, Esterco..."
-                    autocomplete="off"
-                >
-                <span class="search-icon">🔍</span>
-            </div>
+            <form id="agro-form" onsubmit="buscarInsumo(event)">
+                <div class="input-group">
+                    <input type="text" id="insumo-input" placeholder="Ex: Ureia, NPK 10-10-10, Calcário..." required>
+                    <button type="submit">Analisar com IA</button>
+                </div>
+            </form>
         </section>
 
-        <section id="results-section" class="results-container hidden" aria-live="polite">
-            <div class="card-result">
-                <div class="card-header">
-                    <span class="ia-badge">Análise IA Concluída</span>
-                    <h3 id="insumo-nome">Nome do Insumo</h3>
-                    <p id="insumo-tipo" class="insumo-sub">Tipo de Insumo</p>
-                </div>
-                
-                <div class="card-body">
-                    <article class="info-block">
-                        <h4>📋 Propriedades Técnicas</h4>
-                        <p id="insumo-propriedades">Carregando dados técnicos...</p>
-                    </article>
-
-                    <article class="info-block">
-                        <h4>🚜 Onde e Como Usar Corretamente</h4>
-                        <p id="insumo-uso">Carregando instruções de aplicação...</p>
-                    </article>
-
-                    <article class="info-block eco-block">
-                        <h4>💡 Prática Sustentável (Manejo ESG)</h4>
-                        <p id="insumo-sustentavel">Carregando diretrizes sustentáveis...</p>
-                    </article>
-                </div>
+        <!-- Área de Resposta da IA -->
+        <section id="result-section" class="result-box hidden">
+            <header class="result-header">
+                <h3>🤖 Análise da LavourIA</h3>
+                <span class="status-badge">Pronto</span>
+            </header>
+            <div id="result-content" class="result-content">
+                <!-- O JavaScript vai inserir o resultado aqui -->
             </div>
         </section>
-
-        <div id="no-results" class="no-results-message hidden">
-            <p>Insumo não catalogado. Tente pesquisar por termos como <strong>Ureia</strong>, <strong>NPK</strong>, <strong>Calcário</strong> ou <strong>Esterco</strong>.</p>
-        </div>
-
     </main>
 
+    <!-- Rodapé -->
     <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2026 AgroCerto IA. Desenvolvido para o futuro da agricultura sustentável.</p>
-        </div>
+        <p>&copy; 2026 AgroConsultas. Tecnologia e sustentabilidade no agronegócio.</p>
     </footer>
 
     <script src="script.js"></script>
