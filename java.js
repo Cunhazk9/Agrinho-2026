@@ -1,103 +1,81 @@
-// Banco de dados completo dos adubos para a busca dinâmica
+let streamDeVideo = null;
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const btnCapturar = document.getElementById('btn-capturar');
+const linhaEscaneamento = document.getElementById('linha-escaneamento');
+
+// Banco de dados simulado para a resposta da IA baseada na luz do ambiente
 const catalogoAdubos = [
     {
-        nome: "Ureia Agrícola",
-        tipo: "Mineral Simples",
-        nutrientes: "Nitrogênio (46%)",
-        aparencia: "Pequenas esferas brancas e cristalinas",
-        uso: "Fundamental na fase de crescimento vegetativo (folhas e caules). Muito usado em milho, pastagens, cana-de-açúcar e gramados.",
+        nome: "N-P-K 10-10-10 (Fertilizante Mineral Misto)",
+        precisao: "94.2%",
+        descricao: "Grânulos cinzas/coloridos de liberação rápida. Contém uma fórmula totalmente equilibrada com partes iguais de Nitrogênio, Fósforo e Potássio.",
+        uso: "Recomendado para plantas já estabelecidas, manutenção de jardins, árvores frutíferas e folhagens. Promove manutenção contínua.",
+        sustentabilidade: "Atenção: Por ser altamente solúvel, evite aplicar antes de tempestades para evitar a lixiviação (lavagem) dos nutrientes para rios."
+    },
+    {
+        nome: "Ureia Agrícola (Alta Concentração de Nitrogênio)",
+        precisao: "89.7%",
+        descricao: "Pequenas esferas brancas cristalinas. É a maior fonte de Nitrogênio para o solo disponível no mercado.",
+        uso: "Fundamental na fase de crescimento vegetativo (folhas e caules). Muito usado em milho, pastagens e gramados.",
         sustentabilidade: "Dica Sustentável: Incorpore a ureia ao solo ou irrigue logo após a aplicação, reduzindo a perda por volatilização de gases na atmosfera."
     },
     {
-        nome: "NPK 10-10-10",
-        tipo: "Mineral Misto (Equilibrado)",
-        nutrientes: "Nitrogênio (10%), Fósforo (10%), Potássio (10%)",
-        aparencia: "Grânulos cinzas ou coloridos misturados",
-        uso: "Recomendado para plantas já estabelecidas, manutenção de jardins, árvores frutíferas e folhagens. Promove a manutenção contínua e saudável.",
-        sustentabilidade: "Atenção: Por ser altamente solúvel, evite aplicar antes de tempestades para evitar que a chuva lave os nutrientes para rios e lagos."
-    },
-    {
-        nome: "NPK 04-14-08",
-        tipo: "Mineral Misto (Arrancada)",
-        nutrientes: "Nitrogênio (4%), Fósforo (14%), Potássio (8%)",
-        aparencia: "Grânulos cinzas ou marrons",
-        uso: "Ideal para a base do plantio (fundação). O alto teor de Fósforo estimula o crescimento forte das raízes e o estabelecimento inicial da cultura.",
-        sustentabilidade: "Uso Inteligente: Garanta que o adubo fique posicionado próximo à linha de semeadura, mas sem tocar direto na semente para não queimá-la."
-    },
-    {
-        nome: "Farinha de Ossos",
-        tipo: "Orgânico",
-        nutrientes: "Fósforo e Cálcio",
-        aparencia: "Pó fino de coloração bege a marrom clara",
-        uso: "Excelente para o desenvolvimento de raízes, floração e frutificação. Muito utilizado em hortas domésticas, pomares e transplante de mudas.",
-        sustentabilidade: "Sustentabilidade Nota 10: Insumo orgânico de liberação lenta que regenera a microbiota benéfica do solo e reduz o risco de superdosagem."
-    },
-    {
-        nome: "Esterco de Curral / Galinha",
-        tipo: "Orgânico Composto",
-        nutrientes: "Nutrientes variados e Matéria Orgânica",
-        aparencia: "Massa escura texturizada ou farelo marrom",
-        uso: "Melhoria geral da estrutura do solo. Deve ser misturado à terra semanas antes do plantio para condicionar o solo.",
-        sustentabilidade: "Regra de Ouro: Use sempre esterco bem curtido (compostado). O uso de esterco fresco pode introduzir pragas, sementes de plantas daninhas e queimar as raízes."
-    },
-    {
-        nome: "Calcário Agrícola",
-        tipo: "Corretivo de Solo",
-        nutrientes: "Cálcio e Magnésio",
-        aparencia: "Pó fino branco, cinza ou levemente amarelado",
-        uso: "Aplicado na fase de preparação do solo (calagem) para reduzir a acidez excessiva e elevar o pH, preparando a terra para receber os adubos.",
-        sustentabilidade: "Eficiência Prática: Solos corrigidos com calcário aumentam a eficiência da absorção dos outros adubos em até 50%, evitando desperdício de dinheiro."
+        nome: "Farinha de Ossos / Adubo Orgânico",
+        precisao: "91.5%",
+        descricao: "Pó fino de coloração bege a marrom escura. Fonte natural riquíssima em Fósforo e Cálcio de liberação lenta.",
+        uso: "Excelente para o desenvolvimento de raízes, floração e frutificação. Misture bem à terra no momento do plantio de mudas.",
+        sustentabilidade: "Sustentabilidade Nota 10: Insumo orgânico que regenera a microbiota benéfica do solo e não oferece riscos de queima das raízes."
     }
 ];
 
-// Função que filtra os adubos de acordo com o que o usuário digita
-function filtrarAdubos() {
-    const termoBusca = document.getElementById('campo-busca').value.toLowerCase();
-    const containerResultados = document.getElementById('lista-resultados');
-    
-    // Limpa a tela de resultados anteriores
-    containerResultados.innerHTML = "";
-
-    // Filtra o banco de dados buscando por nome, aparência ou tipo
-    const adubosFiltrados = catalogoAdubos.filter(adubo => {
-        return adubo.nome.toLowerCase().includes(termoBusca) || 
-               adubo.aparencia.toLowerCase().includes(termoBusca) ||
-               adubo.tipo.toLowerCase().includes(termoBusca);
-    });
-
-    // Se não encontrar nada
-    if (adubosFiltrados.length === 0) {
-        containerResultados.innerHTML = `<p class="sem-resultado">Nenhum adubo encontrado para "${termoBusca}". Tente termos como 'Ureia', 'Pó', 'Grânulos' ou 'Orgânico'.</p>`;
-        return;
+// Ativa o fluxo da câmera real do dispositivo
+async function iniciarCamera() {
+    try {
+        streamDeVideo = await navigator.mediaDevices.getUserMedia({ 
+            video: { facingMode: "environment" }, // Prioriza a câmera traseira no celular
+            audio: false 
+        });
+        video.srcObject = streamDeVideo;
+        btnCapturar.disabled = false;
+        document.getElementById('btn-carregar-camera').innerText = "Câmera Ativa";
+        document.getElementById('btn-carregar-camera').style.backgroundColor = "#2e7d32";
+    } catch (err) {
+        alert("Erro ao acessar a câmera. Certifique-se de dar permissão ou use um navegador moderno.");
+        console.error(err);
     }
-
-    // Gera o HTML dinamicamente para cada adubo encontrado
-    adubosFiltrados.forEach(adubo => {
-        const cartaoAdubo = document.createElement('div');
-        cartaoAdubo.className = 'card-adubo';
-
-        cartaoAdubo.innerHTML = `
-            <div class="card-header">
-                <h2>${adubo.nome}</h2>
-                <span class="badge-tipo">${adubo.tipo}</span>
-            </div>
-            <div class="card-body">
-                <p><strong>🧪 Nutrientes Principais:</strong> ${adubo.nutrientes}</p>
-                <p><strong>👁️ Aparência Física:</strong> ${adubo.aparencia}</p>
-                <hr>
-                <p><strong>🚜 Onde e Como Usar:</strong> ${adubo.uso}</p>
-                <div class="alerta-sustentavel">
-                    <h5>🌱 Foco Sustentável & Eficiência:</h5>
-                    <p>${adubo.sustentabilidade}</p>
-                </div>
-            </div>
-        `;
-
-        containerResultados.appendChild(cartaoAdubo);
-    });
 }
 
-// Inicializa a página mostrando todos os adubos do catálogo ao carregar
-window.onload = function() {
-    filtrarAdubos();
-};
+// Simula o processamento de visão computacional da IA
+function analisarAdubo() {
+    // Ativa a animação visual do scanner (linha vermelha)
+    linhaEscaneamento.style.display = "block";
+    btnCapturar.innerText = "Processando Imagem...";
+    btnCapturar.disabled = true;
+
+    // Oculta resultados anteriores enquanto processa
+    document.getElementById('resultado-ia').classList.add('hidden');
+
+    // Espera 2.5 segundos (tempo dramático para fingir o cálculo da IA)
+    setTimeout(() => {
+        linhaEscaneamento.style.display = "none";
+        btnCapturar.innerText = "Analisar Insumo 🌱";
+        btnCapturar.disabled = false;
+
+        // Escolhe um adubo aleatório do banco de dados (Simulando uma leitura de visão computacional)
+        const itemSorteado = catalogoAdubos[Math.floor(Math.random() * catalogoAdubos.length)];
+
+        // Preenche a tela com a resposta
+        document.getElementById('adubo-detectado').innerText = itemSorteado.nome;
+        document.getElementById('porcentagem-precisao').innerText = itemSorteado.precisao;
+        document.getElementById('adubo-descricao').innerText = itemSorteado.descricao;
+        document.getElementById('adubo-uso').innerText = itemSorteado.uso;
+        document.getElementById('adubo-sustentavel').innerText = itemSorteado.sustentabilidade;
+
+        // Exibe o painel de resultados e rola a tela até ele
+        const painel = document.getElementById('resultado-ia');
+        painel.classList.remove('hidden');
+        painel.scrollIntoView({ behavior: 'smooth' });
+
+    }, 2500);
+}

@@ -1,8 +1,67 @@
-<section class="busca-container">
-    <h2>Encontre o Adubo Ideal</h2>
-    <p>Digite o nome do adubo, características visuais (ex: pó, esferas) ou tipo (orgânico, mineral):</p>
-    <input type="text" id="campo-busca" oninput="filtrarAdubos()" placeholder="Ex: Ureia, NPK, pó branco, orgânico...">
-</section>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroScan IA - Identificador de Adubos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<section id="lista-resultados" class="grid-resultados">
-    </section>
+    <header>
+        <div class="container">
+            <h1>AgroScan <span>IA</span></h1>
+            <p>Identificação Inteligente de Insumos em Tempo Real</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="scanner-container">
+            <h2>Escaneie seu Adubo</h2>
+            <p>Aponte a câmera para o fertilizante (grânulos ou pó) e clique em "Analisar Insumo".</p>
+            
+            <div class="video-wrapper">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <div id="linha-escaneamento" class="linha"></div>
+            </div>
+
+            <div class="controles">
+                <button id="btn-carregar-camera" onclick="iniciarCamera()">Ligar Câmera</button>
+                <button id="btn-capturar" onclick="analisarAdubo()" disabled>Analisar Insumo 🌱</button>
+            </div>
+        </section>
+
+        <section id="resultado-ia" class="resultado hidden">
+            <div class="resultado-header">
+                <span class="badge">IA Resultado</span>
+                <h2 id="adubo-detectado">Identificando...</h2>
+                <p class="precisao">Precisão estimada: <strong id="porcentagem-precisao">0%</strong></p>
+            </div>
+            
+            <div class="resultado-corpo">
+                <div class="bloco-info">
+                    <h3>📋 Descrição e Características</h3>
+                    <p id="adubo-descricao"></p>
+                </div>
+                
+                <div class="bloco-info">
+                    <h3>🚜 Onde e Como Aplicar</h3>
+                    <p id="adubo-uso"></p>
+                </div>
+
+                <div class="bloco-info alerta">
+                    <h3>⚠️ Recomendação Sustentável</h3>
+                    <p id="adubo-sustentavel"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AgroScan IA - Tecnologia e Sustentabilidade no Campo.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
