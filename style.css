@@ -1,0 +1,236 @@
+/* --- Reset e Configurações de Base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+    --verde-agro: #1b4332;
+    --verde-tech: #40916c;
+    --terra: #7f5539;
+    --fundo-suave: #f4f7f5;
+    --texto-escuro: #2d3748;
+    --branco: #ffffff;
+}
+
+body {
+    background-color: var(--fundo-suave);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Cabeçalho --- */
+.main-header {
+    background-color: var(--verde-agro);
+    color: var(--branco);
+    padding: 20px 0;
+    border-bottom: 4px solid var(--terra);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo h1 span {
+    color: var(--verde-tech);
+}
+
+.tagline {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+/* --- Seção de Busca (Hero) --- */
+.search-section {
+    text-align: center;
+    margin: 50px 0 30px 0;
+}
+
+.search-section h2 {
+    color: var(--verde-agro);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.search-section p {
+    color: #5a6a5d;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+.search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#search-input {
+    width: 100%;
+    padding: 16px 25px;
+    padding-right: 50px;
+    font-size: 1.15rem;
+    border: 2px solid #ced4da;
+    border-radius: 50px;
+    background-color: var(--branco);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--verde-tech);
+    box-shadow: 0 4px 20px rgba(64, 145, 108, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+/* --- Cartão de Resultado Dinâmico --- */
+.results-container {
+    margin-bottom: 50px;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-result {
+    background-color: var(--branco);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border-top: 5px solid var(--verde-tech);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--verde-agro), #143225);
+    color: var(--branco);
+    padding: 30px;
+}
+
+.ia-badge {
+    background-color: var(--verde-tech);
+    color: var(--branco);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.card-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.insumo-sub {
+    color: #a3b899;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.info-block {
+    margin-bottom: 25px;
+}
+
+.info-block:last-child {
+    margin-bottom: 0;
+}
+
+.info-block h4 {
+    color: var(--terra);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-block p {
+    color: #4a5568;
+    font-size: 1rem;
+}
+
+/* Bloco focado em Sustentabilidade */
+.eco-block {
+    background-color: #f0fdf4;
+    padding: 20px;
+    border-left: 4px solid var(--verde-tech);
+    border-radius: 4px;
+}
+
+.eco-block h4 {
+    color: var(--verde-agro);
+}
+
+/* Mensagem de Insumo Não Encontrado */
+.no-results-message {
+    text-align: center;
+    padding: 30px;
+    background-color: #fff3cd;
+    color: #856404;
+    border-radius: 8px;
+    border: 1px solid #ffeeba;
+    margin-bottom: 50px;
+}
+
+/* --- Rodapé --- */
+.main-footer {
+    background-color: #1a202c;
+    color: #a0aec0;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* Animando a entrada da resposta */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 600px) {
+    .header-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .search-section h2 {
+        font-size: 1.7rem;
+    }
+}

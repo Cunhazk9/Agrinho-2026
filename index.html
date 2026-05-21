@@ -3,69 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriCampo - Guia de Adubos Sustentáveis</title>
+    <title>AgroCerto IA - Consulta Instantânea de Insumos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>NutriCampo <span>IA</span></h1>
-            <p>Agro Forte, Inteligente e Sustentável</p>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <h1>AgroCerto <span>IA</span></h1>
+            </div>
+            <p class="tagline">🌱 Produtividade Forte, Consciência Sustentável</p>
         </div>
     </header>
 
     <main class="container">
-        <section class="intro">
-            <h2>Guia Prático de Fertilização</h2>
-            <p>Selecione um tipo de adubo abaixo para descobrir suas características essenciais, componentes e onde ele deve ser aplicado para máxima eficiência e mínimo impacto ambiental.</p>
-        </section>
-
-        <section class="adubos-grid">
-            <div class="card" onclick="mostrarDetalhes('ureia')">
-                <h3>Ureia</h3>
-                <p>Alta concentração de Nitrogênio para crescimento rápido.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('npk')">
-                <h3>NPK (Fórmulas)</h3>
-                <p>O trio clássico: Nitrogênio, Fósforo e Potássio.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('organico')">
-                <h3>Adubo Orgânico</h3>
-                <p>Sustentabilidade pura: Esterco e Compostagem.</p>
-                <button>Ver Detalhes</button>
-            </div>
-
-            <div class="card" onclick="mostrarDetalhes('calcario')">
-                <h3>Calcário</h3>
-                <p>Corretivo de solo para reduzir a acidez.</p>
-                <button>Ver Detalhes</button>
+        
+        <section class="search-section" aria-labelledby="search-title">
+            <h2 id="search-title">O que você vai aplicar no campo hoje?</h2>
+            <p>Digite o nome do adubo ou insumo agrícola para receber recomendações ecológicas e técnicas instantâneas da nossa inteligência.</p>
+            
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Ex: Ureia, NPK 10-10-10, Calcário, Esterco..."
+                    autocomplete="off"
+                >
+                <span class="search-icon">🔍</span>
             </div>
         </section>
 
-        <section id="painel-detalhes" class="detalhes hidden">
-            <div class="detalhes-conteudo">
-                <h2 id="detalhe-nome">Nome do Adubo</h2>
-                <hr>
-                <div class="info-block">
-                    <h3>🌱 Características:</h3>
-                    <p id="detalhe-caracteristicas">Informações sobre as propriedades do adubo.</p>
+        <section id="results-section" class="results-container hidden" aria-live="polite">
+            <div class="card-result">
+                <div class="card-header">
+                    <span class="ia-badge">Análise IA Concluída</span>
+                    <h3 id="insumo-nome">Nome do Insumo</h3>
+                    <p id="insumo-tipo" class="insumo-sub">Tipo de Insumo</p>
                 </div>
-                <div class="info-block">
-                    <h3>🚜 Onde e Como Usar:</h3>
-                    <p id="detalhe-uso">Instruções de aplicação no campo ou jardim.</p>
+                
+                <div class="card-body">
+                    <article class="info-block">
+                        <h4>📋 Propriedades Técnicas</h4>
+                        <p id="insumo-propriedades">Carregando dados técnicos...</p>
+                    </article>
+
+                    <article class="info-block">
+                        <h4>🚜 Onde e Como Usar Corretamente</h4>
+                        <p id="insumo-uso">Carregando instruções de aplicação...</p>
+                    </article>
+
+                    <article class="info-block eco-block">
+                        <h4>💡 Prática Sustentável (Manejo ESG)</h4>
+                        <p id="insumo-sustentavel">Carregando diretrizes sustentáveis...</p>
+                    </article>
                 </div>
-                <button onclick="fecharDetalhes()" class="btn-fechar">Fechar Detalhes</button>
             </div>
         </section>
+
+        <div id="no-results" class="no-results-message hidden">
+            <p>Insumo não catalogado. Tente pesquisar por termos como <strong>Ureia</strong>, <strong>NPK</strong>, <strong>Calcário</strong> ou <strong>Esterco</strong>.</p>
+        </div>
+
     </main>
 
-    <footer>
-        <p>&copy; 2026 NutriCampo - Tecnologia para um Agro Sustentável.</p>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 AgroCerto IA. Desenvolvido para o futuro da agricultura sustentável.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
