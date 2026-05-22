@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyD5IbUdCZa3FybC0JLaqQvh0NHN7fHdz04'; // Insira a sua chave gerada no Google AI Studio
+const API_KEY = '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'; // Insira a sua chave gerada no Google AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
