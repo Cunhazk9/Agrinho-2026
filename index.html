@@ -3,124 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachable Machine - Reconhecimento de Imagem</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        h1 {
-            color: #333;
-        }
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #webcam-container {
-            margin-bottom: 20px;
-            border: 4px solid #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-            line-height: 0;
-        }
-        #label-container {
-            font-size: 18px;
-            font-weight: bold;
-            color: #444;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            min-width: 200px;
-            text-align: center;
-        }
-        #label-container div {
-            margin: 5px 0;
-        }
-    </style>
+    <title>Assistente Técnico Rural - IA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Assistente Agro IA 🌾</h1>
+        <p>Faça perguntas sobre plantio, pragas, clima ou manejo do solo.</p>
+        
+        <div class="chat-box" id="chatBox">
+            </div>
 
-    <h1>Teachable Machine Image Model</h1>
-    <button type="button" onclick="init()">Iniciar Câmera</button>
-    
-    <div id="webcam-container"></div>
-    <div id="label-container"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ex: Qual a melhor época para plantar soja no Paraná?">
+            <button onclick="enviarPergunta()">Perguntar</button>
+        </div>
+    </div>
 
-    <!-- Carga das bibliotecas do TensorFlow e Teachable Machine -->
-    <script src="https://jsdelivr.net"></script>
-    <script src="https://jsdelivr.net"></script>
-
-    <script type="text/javascript">
-        // Link para um modelo público de testes (Pessoa vs Fundo)
-        // Substitua por sua própria URL gerada no Teachable Machine quando seu modelo estiver pronto
-        const URL = "https://withgoogle.com";
-
-        let model, webcam, labelContainer, maxPredictions;
-
-        // Inicializa o modelo e configura a webcam
-        async function init() {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-
-            // Carrega o modelo de inteligência artificial
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-
-            // Configurações da webcam
-            const flip = true; // Espelhar a imagem
-            webcam = new tmImage.Webcam(250, 250, flip); // largura, altura, espelhamento
-            
-            await webcam.setup(); // Solicita permissão para acessar a câmera
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-
-            // Insere o elemento da webcam na página HTML
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            
-            // Prepara a área de exibição dos resultados (labels)
-            labelContainer = document.getElementById("label-container");
-            labelContainer.innerHTML = ""; // Limpa texto anterior caso reiniciado
-            for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
-            }
-        }
-
-        // Loop contínuo para atualizar a câmera e fazer as previsões
-        async function loop() {
-            webcam.update(); 
-            await predict();
-            window.requestAnimationFrame(loop);
-        }
-
-        // Passa o quadro atual da webcam pelo modelo e exibe os resultados na tela
-        async function predict() {
-            const prediction = await model.predict(webcam.canvas);
-            for (let i = 0; i < maxPredictions; i++) {
-                // Formata o resultado para exibir o nome da classe e a porcentagem (Ex: Pessoa: 95%)
-                const percentage = (prediction[i].probability * 100).toFixed(0);
-                const classPrediction = prediction[i].className + ": " + percentage + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
-            }
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
