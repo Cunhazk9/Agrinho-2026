@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyCPLPWj6vzWxORq-az-ys-6REjtYmudeIM'; // <--- Cole a nova chave gerada aqui!
+const API_KEY = 'AIzaSyCPLPWj6vzWxORq-az-ys-6REjtYmudeIM'; // <-- Substitua pelo seu código de chave real do AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
@@ -7,25 +7,25 @@ async function enviarPergunta() {
 
     if (!pergunta) return;
 
-    // 1. Mostra a pergunta na tela
+    // 1. Exibe a pergunta do produtor
     chatBox.innerHTML += `<p><strong>Produtor:</strong> ${pergunta}</p>`;
     inputElement.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. Status de Carregamento
+    // 2. Elemento de Carregamento
     const loadingText = document.createElement('p');
     loadingText.id = "status-carregando";
     loadingText.innerHTML = "<em>Buscando resposta técnica...</em>";
     chatBox.appendChild(loadingText);
 
-    // 3. URL na rota estável v1beta (Ideal para requisições diretas de chaves gratuitas)
+    // 3. URL CORRIGIDA PARA O PADRÃO DE INTEGRALIZAÇÃO ATUAL
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-    // 4. Estrutura de dados recomendada pelo Google
+    // 4. Estrutura de dados simplificada (Corpo da Requisição)
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma muito clara, prática e em português sobre: ${pergunta}`
+                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma curta, prática e em português sobre: ${pergunta}`
             }]
         }]
     };
@@ -33,11 +33,13 @@ async function enviarPergunta() {
     try {
         const resposta = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
             body: JSON.stringify(dados)
         });
 
-        // Remove carregando
+        // Remove o texto de carregamento
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
@@ -56,7 +58,7 @@ async function enviarPergunta() {
                 <strong>Assistente Agro:</strong><br>${textoIA.replace(/\n/g, '<br>')}
             </div>`;
         } else {
-            chatBox.innerHTML += `<p style="color:orange;">O modelo não retornou um formato de texto válido.</p>`;
+            chatBox.innerHTML += `<p style="color:orange;">Não foi possível ler a estrutura da resposta do modelo.</p>`;
         }
 
     } catch (erro) {
