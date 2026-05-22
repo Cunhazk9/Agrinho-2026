@@ -18,13 +18,14 @@ async function enviarPergunta() {
 
     // 2. URL ATUALIZADA (Usando o modelo estável gemini-2.5-flash)
     const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
-    // 3. ESTRUTURA CORRETA DO CORPO DA REQUISIÇÃO
+    // SUBSTITUA O BLOCO CONST DADOS POR ESTE AQUI:
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um agrônomo especialista em ajudar produtores rurais. Responda de forma clara, prática e em português sobre: ${pergunta}`
+                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma muito clara, prática e em português sobre: ${pergunta}`
             }]
-        }],
+        }]
+    };
         // Ativa a busca integrada do Google para trazer dados reais e atualizados
         tools: [{
             googleSearch: {}
@@ -74,4 +75,3 @@ async function enviarPergunta() {
         chatBox.innerHTML += `<p style="color:red;">Erro ao consultar a IA. Verifique sua chave API ou a conexão.</p>`;
         chatBox.scrollTop = chatBox.scrollHeight;
     }
-}
