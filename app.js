@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; 
+const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // Coloque sua chave real aqui
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
@@ -11,42 +11,68 @@ async function enviarPergunta() {
     chatBox.innerHTML += `<p><strong>Produtor:</strong> ${pergunta}</p>`;
     inputElement.value = '';
 
-    // URL da API oficial do Gemini
+    // 1. CRIAR O ELEMENTO DE CARREGAMENTO (Com ID correto para não dar erro ao remover)
+    const carregandoId = "carregando_" + Date.now();
+    chatBox.innerHTML += `<p id="${carregandoId}"><em>Buscando informações no Google...</em></p>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // 2. URL ATUALIZADA (Usando o modelo estável gemini-1.5-flash)
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-    // Configurando o pedido para a IA agir como especialista e buscar no Google
+    // 3. ESTRUTURA CORRETA DO CORPO DA REQUISIÇÃO
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um agrônomo especialista em ajudar produtores rurais. Use a busca do Google para trazer respostas precisas, práticas e atualizadas em português sobre: ${pergunta}`
+                text: `Você é um agrônomo especialista em ajudar produtores rurais. Responda de forma clara, prática e em português sobre: ${pergunta}`
             }]
         }],
-        // Ativa a ferramenta de busca do Google (Google Search Grounding)
-        tools: [{ googleSearch: {} }] 
+        // Ativa a busca integrada do Google para trazer dados reais e atualizados
+        tools: [{
+            googleSearch: {}
+        }]
     };
 
     try {
-        chatBox.innerHTML += `<p id="carregando"><em>Buscando informações no Google...</em></p>`;
-        
         const resposta = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
             body: JSON.stringify(dados)
         });
 
-        const resultado = await resposta.json();
-        document.getElementById('carregando').remove();
+        // Remove a mensagem de carregamento antes de processar
+        const elementoCarregando = document.getElementById(carregandoId);
+        if (elementoCarregando) elementoCarregando.remove();
 
-        // Extrai o texto da IA
-        const textoIA = resultado.candidates[0].content.parts[0].text;
+        // Se o Google responder com erro (tipo 404 ou 400), cai aqui
+        if (!resposta.ok) {
+            const erroTexto = await resposta.text();
+            throw new Error(`Erro na API do Google: ${resposta.status} - ${erroTexto}`);
+        }
+
+        const resultado = await resposta.json();
+
+        // 4. VERIFICAÇÃO DE SEGURANÇA (Evita o erro de "undefined")
+        if (resultado.candidates && resultado.candidates[0]?.content?.parts?.[0]?.text) {
+            const textoIA = resultado.candidates[0].content.parts[0].text;
+            
+            // Exibe na tela a resposta formatada
+            chatBox.innerHTML += `<p style="background:#e8f5e9; padding:10px; border-radius:5px; margin: 10px 0;"><strong>Assistente Agro:</strong> ${textoIA}</p>`;
+        } else {
+            chatBox.innerHTML += `<p style="color:orange;">A IA não conseguiu gerar uma resposta adequada para essa pergunta.</p>`;
+        }
         
-        // Exibe na tela
-        chatBox.innerHTML += `<p style="background:#e8f5e9; padding:10px; border-radius:5px;"><strong>Assistente Agro:</strong> ${textoIA}</p>`;
         chatBox.scrollTop = chatBox.scrollHeight;
 
     } catch (erro) {
-        console.error(erro);
-        document.getElementById('carregando').remove();
-        chatBox.innerHTML += `<p style="color:red;">Erro ao consultar a IA. Tente novamente.</p>`;
+        console.error("Erro detalhado:", erro);
+        
+        // Remove o carregando caso tenha dado erro no meio do caminho
+        const elementoCarregando = document.getElementById(carregandoId);
+        if (elementoCarregando) elementoCarregando.remove();
+
+        chatBox.innerHTML += `<p style="color:red;">Erro ao consultar a IA. Verifique sua chave API ou a conexão.</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
