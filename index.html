@@ -3,49 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroConsultas | Inteligência Artificial do Campo</title>
+    <title>Meu Primeiro Site</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Cabeçalho Principal -->
-    <header class="main-header">
-        <div class="logo">
-            <span class="icon">🌱</span>
-            <h1>Agro<span>Consultas</span></h1>
-        </div>
-        <p>A inteligência do campo na velocidade que sua lavoura precisa.</p>
+    <header>
+        <h1>Bem-vindo ao Meu Site</h1>
+        <p>Criado com HTML, CSS e JavaScript</p>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="search-container">
-        <section class="search-box">
-            <h2>Consulte seu Insumo ou Adubo</h2>
-            <p>Digite o nome do produto para receber recomendações e análises imediatas da nossa IA.</p>
-            
-            <form id="agro-form" onsubmit="buscarInsumo(event)">
-                <div class="input-group">
-                    <input type="text" id="insumo-input" placeholder="Ex: Ureia, NPK 10-10-10, Calcário..." required>
-                    <button type="submit">Analisar com IA</button>
-                </div>
-            </form>
-        </section>
-
-        <!-- Área de Resposta da IA -->
-        <section id="result-section" class="result-box hidden">
-            <header class="result-header">
-                <h3>🤖 Análise da LavourIA</h3>
-                <span class="status-badge">Pronto</span>
-            </header>
-            <div id="result-content" class="result-content">
-                <!-- O JavaScript vai inserir o resultado aqui -->
-            </div>
+    <main>
+        <section class="conteudo">
+            <h2>Sobre o Projeto</h2>
+            <p>Este é um modelo básico para você iniciar no desenvolvimento web.</p>
+            <button id="botaoInterativo">Clique Aqui</button>
+            <p id="mensagem" class="escondido">Obrigado por clicar! O JavaScript está funcionando.</p>
         </section>
     </main>
 
-    <!-- Rodapé -->
-    <footer class="main-footer">
-        <p>&copy; 2026 AgroConsultas. Tecnologia e sustentabilidade no agronegócio.</p>
+    <footer>
+        <p>&copy; 2026 - Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>
