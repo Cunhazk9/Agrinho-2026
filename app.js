@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // Subsitua pela sua chave do Google AI Studio
+const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // <--- Coloque sua chave real aqui dentro das aspas
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
@@ -7,25 +7,25 @@ async function enviarPergunta() {
 
     if (!pergunta) return;
 
-    // 1. Exibe a pergunta do produtor rural na tela
+    // 1. Mostra a pergunta na tela
     chatBox.innerHTML += `<p><strong>Produtor:</strong> ${pergunta}</p>`;
     inputElement.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. Cria a mensagem de carregamento
+    // 2. Cria o elemento de carregamento
     const loadingText = document.createElement('p');
     loadingText.id = "status-carregando";
-    loadingText.innerHTML = "<em>Pensando na resposta...</em>";
+    loadingText.innerHTML = "<em>Processando resposta agrícola...</em>";
     chatBox.appendChild(loadingText);
 
-    // 3. URL corrigida com o modelo estável aceito em v1
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+    // 3. URL padrão universal v1
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-    // 4. Estrutura de dados limpa
+    // 4. Payload (dados) no padrão aceito pelo v1
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma muito clara, prática e em português sobre: ${pergunta}`
+                text: `Você é um engenheiro agrônomo especialista. Responda de forma prática e em português para um produtor rural sobre: ${pergunta}`
             }]
         }]
     };
@@ -33,7 +33,9 @@ async function enviarPergunta() {
     try {
         const resposta = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
             body: JSON.stringify(dados)
         });
 
@@ -48,7 +50,7 @@ async function enviarPergunta() {
 
         const resultado = await resposta.json();
 
-        // 5. Exibe a resposta estruturada do Gemini na tela
+        // 5. Renderiza a resposta caso exista
         if (resultado && resultado.candidates && resultado.candidates[0].content.parts[0].text) {
             const textoIA = resultado.candidates[0].content.parts[0].text;
             
@@ -56,11 +58,11 @@ async function enviarPergunta() {
                 <strong>Assistente Agro:</strong><br>${textoIA.replace(/\n/g, '<br>')}
             </div>`;
         } else {
-            chatBox.innerHTML += `<p style="color:orange;">Não foi possível estruturar a resposta recebida.</p>`;
+            chatBox.innerHTML += `<p style="color:orange;">O modelo não retornou um formato de texto válido.</p>`;
         }
 
     } catch (erro) {
-        console.error("Erro detalhado:", erro);
+        console.error("Erro capturado:", erro);
         
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
