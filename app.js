@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyCPLPWj6vzWxORq-az-ys-6REjtYmudeIM'; // <-- Substitua pelo seu código de chave real do AI Studio
+const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // <-- Substitua pelo seu código de chave real do AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
