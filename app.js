@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyCPLPWj6vzWxORq-az-ys-6REjtYmudeIM'; // <--- Coloque sua chave real aqui dentro das aspas
+const API_KEY = 'AIzaSyCPLPWj6vzWxORq-az-ys-6REjtYmudeIM'; // <--- Cole a nova chave gerada aqui!
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
@@ -12,20 +12,20 @@ async function enviarPergunta() {
     inputElement.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. Cria o elemento de carregamento
+    // 2. Status de Carregamento
     const loadingText = document.createElement('p');
     loadingText.id = "status-carregando";
-    loadingText.innerHTML = "<em>Processando resposta agrícola...</em>";
+    loadingText.innerHTML = "<em>Buscando resposta técnica...</em>";
     chatBox.appendChild(loadingText);
 
-    // 3. URL padrão universal v1
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // 3. URL na rota estável v1beta (Ideal para requisições diretas de chaves gratuitas)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-    // 4. Payload (dados) no padrão aceito pelo v1
+    // 4. Estrutura de dados recomendada pelo Google
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um engenheiro agrônomo especialista. Responda de forma prática e em português para um produtor rural sobre: ${pergunta}`
+                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma muito clara, prática e em português sobre: ${pergunta}`
             }]
         }]
     };
@@ -33,24 +33,22 @@ async function enviarPergunta() {
     try {
         const resposta = await fetch(url, {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json' 
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         });
 
-        // Remove o carregando
+        // Remove carregando
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
         if (!resposta.ok) {
             const erroTexto = await resposta.text();
-            throw new Error(`Erro na API: ${resposta.status} - ${erroTexto}`);
+            throw new Error(`Erro na API do Google: ${resposta.status} - ${erroTexto}`);
         }
 
         const resultado = await resposta.json();
 
-        // 5. Renderiza a resposta caso exista
+        // 5. Exibe a resposta estruturada na tela
         if (resultado && resultado.candidates && resultado.candidates[0].content.parts[0].text) {
             const textoIA = resultado.candidates[0].content.parts[0].text;
             
@@ -67,7 +65,7 @@ async function enviarPergunta() {
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
-        chatBox.innerHTML += `<p style="color:red;">Erro ao consultar a IA. Verifique sua chave API ou a conexão.</p>`;
+        chatBox.innerHTML += `<p style="color:red;">Erro ao consultar a IA. Verifique sua chave API ou se o projeto no AI Studio está ativo.</p>`;
     }
 
     chatBox.scrollTop = chatBox.scrollHeight;
