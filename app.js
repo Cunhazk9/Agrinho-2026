@@ -16,7 +16,7 @@ async function enviarPergunta() {
     chatBox.innerHTML += `<p id="${carregandoId}"><em>Buscando informações no Google...</em></p>`;
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. URL ATUALIZADA (Usando o modelo estável gemini-1.5-flash)
+    // 2. URL ATUALIZADA (Usando o modelo estável gemini-2.5-flash)
     const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
     // 3. ESTRUTURA CORRETA DO CORPO DA REQUISIÇÃO
     const dados = {
