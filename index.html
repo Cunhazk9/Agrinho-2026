@@ -3,26 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro Site</title>
+    <title>AgroBusca - O Google da Agricultura</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao Meu Site</h1>
-        <p>Criado com HTML, CSS e JavaScript</p>
-    </header>
 
-    <main>
-        <section class="conteudo">
-            <h2>Sobre o Projeto</h2>
-            <p>Este é um modelo básico para você iniciar no desenvolvimento web.</p>
-            <button id="botaoInterativo">Clique Aqui</button>
-            <p id="mensagem" class="escondido">Obrigado por clicar! O JavaScript está funcionando.</p>
-        </section>
+    <!-- Barra de Navegação Superior -->
+    <nav class="navbar">
+        <div class="logo">AgroBusca</div>
+        <ul class="nav-links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Culturas</a></li>
+            <li><a href="#">Tecnologia</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Centro da Tela: Motor de Busca -->
+    <main class="search-container">
+        <h1 class="search-logo">Agro<span>Busca</span></h1>
+        
+        <div class="search-box">
+            <input type="text" id="inputPesquisa" placeholder="Pesquise sobre soja, milho, irrigação, pragas...">
+            <button id="botaoPesquisar">Pesquisar</button>
+        </div>
+
+        <!-- Área onde os resultados vão aparecer -->
+        <section id="resultados" class="results-container"></section>
     </main>
 
     <footer>
-        <p>&copy; 2026 - Todos os direitos reservados.</p>
+        <p>&copy; 2026 AgroBusca - O conhecimento agrícola ao seu alcance.</p>
     </footer>
 
     <script src="script.js"></script>
