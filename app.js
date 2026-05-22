@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // <--- Coloque sua chave real aqui dentro das aspas
+const API_KEY = 'AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU'; // Subsitua pela sua chave do Google AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
@@ -7,19 +7,19 @@ async function enviarPergunta() {
 
     if (!pergunta) return;
 
-    // 1. Exibe a pergunta na tela
+    // 1. Exibe a pergunta do produtor rural na tela
     chatBox.innerHTML += `<p><strong>Produtor:</strong> ${pergunta}</p>`;
     inputElement.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. Cria o status de carregamento
+    // 2. Cria a mensagem de carregamento
     const loadingText = document.createElement('p');
     loadingText.id = "status-carregando";
     loadingText.innerHTML = "<em>Pensando na resposta...</em>";
     chatBox.appendChild(loadingText);
 
-    // 3. URL estável v1
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // 3. URL corrigida com o modelo estável aceito em v1
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 
     // 4. Estrutura de dados limpa
     const dados = {
@@ -37,7 +37,7 @@ async function enviarPergunta() {
             body: JSON.stringify(dados)
         });
 
-        // Remove o texto de carregamento
+        // Remove o carregando
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
@@ -48,7 +48,7 @@ async function enviarPergunta() {
 
         const resultado = await resposta.json();
 
-        // 5. Exibe a resposta estruturada na tela
+        // 5. Exibe a resposta estruturada do Gemini na tela
         if (resultado && resultado.candidates && resultado.candidates[0].content.parts[0].text) {
             const textoIA = resultado.candidates[0].content.parts[0].text;
             
