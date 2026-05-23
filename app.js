@@ -1,4 +1,4 @@
-const API_KEY = 'sk-proj-MockKeyJustForTestingPurposesNotRealXyZ1234567890AbCdEfGhIjKlMnOpQrStUvWxYz1234567890AbCdEfGhIjKlMnOpQrStUvWxYz'; // Insira a sua chave gerada no Google AI Studio
+const API_KEY = 'AIzaSyAiabDwOSb1ewNchApzsLxNZik2iib20P4'; // Insira a sua chave gerada no Google AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
