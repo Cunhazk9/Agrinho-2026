@@ -1,4 +1,6 @@
-const API_KEY = 'AIzaSyAiabDwOSb1ewNchApzsLxNZik2iib20P4'; // Insira a sua chave gerada no Google AI Studio
+// Em vez de: const API_KEY = "AIzaSy..."
+// Use:
+const apiKeyInput = document.getElementById('api-key-field').value;
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
