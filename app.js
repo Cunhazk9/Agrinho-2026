@@ -1,4 +1,4 @@
-const API_KEY = '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'; // Insira a sua chave gerada no Google AI Studio
+const API_KEY = 'sk-proj-MockKeyJustForTestingPurposesNotRealXyZ1234567890AbCdEfGhIjKlMnOpQrStUvWxYz1234567890AbCdEfGhIjKlMnOpQrStUvWxYz'; // Insira a sua chave gerada no Google AI Studio
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
