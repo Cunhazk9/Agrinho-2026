@@ -1,0 +1,70 @@
+# 🌿 Agro Tech — IA para o Campo
+
+Uma plataforma de chat com IA estilo Gemini, especializada em agricultura, agronomia e tecnologia do campo. Desenvolvida com HTML, CSS e JavaScript puros.
+
+---
+
+## 🚀 Como publicar no GitHub Pages
+
+### Passo 1 — Criar o repositório
+1. Acesse [github.com](https://github.com) e faça login
+2. Clique em **"New repository"** (botão verde)
+3. Nome sugerido: `agro-tech`
+4. Marque como **Public**
+5. Clique em **"Create repository"**
+
+### Passo 2 — Fazer upload dos arquivos
+Na página do repositório recém-criado:
+1. Clique em **"uploading an existing file"**
+2. Arraste os 3 arquivos: `index.html`, `style.css`, `script.js`
+3. Clique em **"Commit changes"**
+
+### Passo 3 — Ativar o GitHub Pages
+1. Vá em **Settings** (aba no topo do repositório)
+2. No menu lateral, clique em **Pages**
+3. Em **"Branch"**, selecione `main` e pasta `/ (root)`
+4. Clique em **Save**
+5. Aguarde ~1 minuto e acesse a URL gerada:  
+   `https://SEU-USUARIO.github.io/agro-tech`
+
+---
+
+## 🔑 Como obter sua API Key (Anthropic)
+
+1. Acesse [console.anthropic.com](https://console.anthropic.com)
+2. Crie uma conta ou faça login
+3. Vá em **API Keys** → **Create Key**
+4. Copie a chave (começa com `sk-ant-`)
+5. Cole no campo **"Chave da API"** no menu lateral do site
+
+---
+
+## 📁 Estrutura dos arquivos
+
+```
+agro-tech/
+├── index.html    → Estrutura da página
+├── style.css     → Estilos e tema claro/escuro
+└── script.js     → Lógica, integração com API Claude
+```
+
+---
+
+## ✨ Funcionalidades
+
+- 💬 Chat estilo Gemini com streaming visual
+- 🌙 Tema claro / escuro
+- 📚 Histórico de conversas (salvo no navegador)
+- 🔑 Gerenciamento seguro da API Key (localStorage)
+- 📱 Totalmente responsivo (mobile, tablet, desktop)
+- 📋 Botão de copiar resposta
+- 🌱 Sugestões de perguntas agrícolas
+- ✅ Formatação Markdown nas respostas
+
+---
+
+## 🛡️ Segurança
+
+A API Key é armazenada **apenas no seu navegador** (localStorage), nunca em servidores externos. O site é estático e não possui backend.
+
+> **Atenção**: Este site usa acesso direto à API do Claude pelo navegador. Recomendado para uso pessoal ou projetos privados. Para produção em larga escala, utilize um backend intermediário.
