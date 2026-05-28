@@ -1,41 +1,45 @@
 async function enviarPergunta() {
     const keyInput = document.getElementById('apiKeyInput');
     const inputElement = document.getElementById('userInput');
-    const chatBox = document.getElementById('chatBox');
+    const chatContainer = document.getElementById('chatContainer');
+    const welcomeScreen = document.getElementById('welcomeScreen');
     
     const API_KEY = keyInput.value.trim();
     const pergunta = inputElement.value.trim();
 
-    // Validações obrigatórias antes de rodar
     if (!pergunta) return;
     
     if (!API_KEY) {
-        chatBox.innerHTML += `<div class="mensagem-sistema" style="color:red; background:#ffebee;">Erro: Insira sua chave API do Gemini no topo da tela.</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        alert("Por favor, cole sua chave API do Gemini na barra lateral esquerda antes de enviar.");
         return;
     }
 
-    // 1. Adiciona a pergunta do produtor formatada na tela
-    chatBox.innerHTML += `<div class="balao-produtor"><strong>Produtor:</strong><br>${pergunta}</div>`;
-    inputElement.value = ''; // Limpa o campo de texto
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // Esconde a tela de boas-vindas no primeiro envio
+    if (welcomeScreen) {
+        welcomeScreen.remove();
+    }
 
-    // 2. Cria o indicador visual de carregamento
-    const loadingText = document.createElement('div');
-    loadingText.id = "status-carregando";
-    loadingText.className = "status-carregando";
-    loadingText.innerHTML = "<em>Buscando resposta técnica...</em>";
-    chatBox.appendChild(loadingText);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // 1. Renderiza a pergunta do usuário na tela
+    chatContainer.innerHTML += `<div class="msg-user">${pergunta}</div>`;
+    inputElement.value = ''; // Limpa campo de texto
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    // 3. Define a URL usando o modelo gemini-1.5-flash
+    // 2. Cria balão de carregamento da IA
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = "status-carregando";
+    loadingDiv.className = "msg-ai status-loading";
+    loadingDiv.innerHTML = `<div class="ai-icon-wrapper"><i class="fa-solid fa-leaf"></i></div> <span>Analisando dados agrícolas...</span>`;
+    chatContainer.appendChild(loadingDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // 3. Define URL do endpoint usando o modelo Gemini 1.5 Flash
     const url = `https://googleapis.com{API_KEY}`;
 
-    // 4. Estrutura de dados corrigida para a API oficial do Gemini
+    // 4. Monta o Prompt de engenheiro agrônomo
     const dados = {
         contents: [{
             parts: [{
-                text: `Você é um engenheiro agrônomo especialista em ajudar produtores rurais. Responda de forma clara, prática, direta e em português sobre: ${pergunta}`
+                text: `Você é o Agro Tech, uma inteligência artificial especialista em agronegócio e engenharia agronômica. Responda o produtor rural com clareza técnica, formatação amigável, tópicos estruturados e em português de Portugal ou Brasil sobre: ${pergunta}`
             }]
         }]
     };
@@ -43,13 +47,11 @@ async function enviarPergunta() {
     try {
         const resposta = await fetch(url, {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json' 
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         });
 
-        // Remove o indicador de carregamento
+        // Remove balão de carregamento
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
@@ -60,27 +62,43 @@ async function enviarPergunta() {
 
         const resultado = await resposta.json();
 
-        // 5. Captura do nó correto da resposta JSON (Corrigido estruturalmente)
+        // 5. Trata e renderiza a resposta retornada
         if (resultado?.candidates?.[0]?.content?.parts?.[0]?.text) {
-            const textoIA = resultado.candidates[0].content.parts[0].text;
+            let textoIA = resultado.candidates[0].content.parts[0].text;
             
-            // Renderiza a resposta convertendo quebras de linha em tags HTML <br>
-            chatBox.innerHTML += `<div class="balao-assistente">
-                <strong>Assistente Agro:</strong><br>${textoIA.replace(/\n/g, '<br>')}
-            </div>`;
+            // Converte quebras de linha normais em tags HTML <br> para manter parágrafos
+            let textoFormatado = textoIA.replace(/\n/g, '<br>');
+
+            chatContainer.innerHTML += `
+                <div class="msg-ai">
+                    <div class="ai-icon-wrapper"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="ai-response-text">
+                        <strong>Agro Tech:</strong><br><br>${textoFormatado}
+                    </div>
+                </div>
+            `;
         } else {
-            chatBox.innerHTML += `<div class="mensagem-sistema" style="color:orange;">Não foi possível interpretar a estrutura do retorno da IA.</div>`;
+            chatContainer.innerHTML += `<div class="msg-ai" style="color:orange;">O modelo não retornou uma resposta válida estruturada.</div>`;
         }
 
     } catch (erro) {
-        console.error("Erro detalhado na requisição:", erro);
-        
+        console.error("Erro na requisição:", erro);
         const elementoLoading = document.getElementById("status-carregando");
         if (elementoLoading) elementoLoading.remove();
 
-        chatBox.innerHTML += `<div class="mensagem-sistema" style="color:red; background:#ffebee;">Erro ao consultar a IA. Verifique se sua chave API é válida e se possui permissões.</div>`;
+        chatContainer.innerHTML += `<div class="msg-ai" style="color:#ff6b6b;"><i class="fa-solid fa-circle-exclamation"></i> Ocorreu um erro. Verifique sua chave API e sua conexão de rede.</div>`;
     }
 
-    // Rola o chat para o fim da tela
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Preenche a barra com as sugestões dos cards rápidos
+function sugerirPergunta(texto) {
+    document.getElementById('userInput').value = texto;
+    document.getElementById('userInput').focus();
+}
+
+// Reseta o estado do aplicativo limpando o histórico
+function limparChat() {
+    location.reload();
 }
