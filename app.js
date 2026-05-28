@@ -1,6 +1,6 @@
 // Em vez de: const API_KEY = "AIzaSy..."
 // Use:
-const apiKeyInput = document.getElementById('api-key-field').value;
+const apiKeyInput = document.getElementById('AIzaSyD3jjcmtn2fg_ZqecySpM3kU77AuX6AWWU').value;
 
 async function enviarPergunta() {
     const inputElement = document.getElementById('userInput');
