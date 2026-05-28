@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistente Técnico Rural - IA</title>
+    <title>Assistente Agro Gemini</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Assistente Agro IA 🌾</h1>
-        <p>Faça perguntas sobre plantio, pragas, clima ou manejo do solo.</p>
-        
-        <div class="chat-box" id="chatBox">
+    <div class="app-container">
+        <header>
+            <h1>Assistente Agro</h1>
+            <div class="api-key-container">
+                <label for="apiKeyInput">Chave API Gemini:</label>
+                <input type="password" id="apiKeyInput" placeholder="Cole sua chave API aqui...">
             </div>
+        </header>
+
+        <div id="chatBox" class="chat-box">
+            <div class="mensagem-sistema">O sistema está pronto. Insira sua chave API e faça uma pergunta técnica sobre agronegócio.</div>
+        </div>
 
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="Ex: Qual a melhor época para plantar soja no Paraná?">
-            <button onclick="enviarPergunta()">Perguntar</button>
+            <input type="text" id="userInput" placeholder="Digite sua dúvida agrícola aqui..." onkeydown="if(event.key === 'Enter') enviarPergunta()">
+            <button onclick="enviarPergunta()">Enviar</button>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
