@@ -1,20 +1,18 @@
-package com.agro.sustentavel.dto;
+package com.agro.eficaz.dto;
 
-public class DadosDiagnosticoDto {
+public class DadosCalculoDto {
     private double area;
-    private double fertilizantes;
+    private double recomendacao;
 
-    // Construtores
-    public DadosDiagnosticoDto() {}
+    public DadosCalculoDto() {}
 
-    public DadosDiagnosticoDto(double area, double fertilizantes) {
+    public DadosCalculoDto(double area, double recomendacao) {
         this.area = area;
-        this.fertilizantes = fertilizantes;
+        this.recomendacao = recomendacao;
     }
 
-    // Getters e Setters
     public double getArea() { return area; }
     public void setArea(double area) { this.area = area; }
-    public double getFertilizantes() { return fertilizantes; }
-    public void setFertilizantes(double fertilizantes) { this.fertilizantes = fertilizantes; }
+    public double getRecomendacao() { return recomendacao; }
+    public void setRecomendacao(double recomendacao) { this.recomendacao = recomendacao; }
 }

@@ -1,6 +1,6 @@
-package com.agro.sustentavel.controller;
+package com.agro.eficaz.controller;
 
-import com.agro.sustentavel.dto.DadosDiagnosticoDto;
+import com.agro.eficaz.dto.DadosCalculoDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,30 +9,30 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/diagnostico")
-@CrossOrigin(origins = "*") 
-public class DiagnosticoController {
+@CrossOrigin(origins = "*")
+public class CalculoController {
 
     @PostMapping("/calcular")
-    public ResponseEntity<Map<String, Object>> calcularImpacto(@RequestBody DadosDiagnosticoDto dados) {
+    public ResponseEntity<Map<String, Object>> calcularDefensivos(@RequestBody DadosCalculoDto dados) {
         double area = dados.getArea();
-        double fertilizantes = dados.getFertilizantes();
+        double recomendacao = dados.getRecomendacao();
         
-        double emissoesCalculadas = (area * 0.12) + (fertilizantes * 2.4);
-        double potencialCredito = area * 1.5; 
+        double totalProduto = area * recomendacao;
+        double totalAgua = area * 150; // Constante padrão de 150 Litros de calda por Hectare
         
-        String status = "Equilíbrio Excelente!";
-        String recomendacao = "Sua propriedade cumpre ótimos requisitos ecológicos. Você está apto a aplicar para certificações internacionais de créditos de carbono.";
+        String status = "Manejo Padrão Seguro";
+        String recomendacaoTexto = "A quantidade indicada está dentro dos limites sustentáveis de segurança. Monitore as condições climáticas (vento e umidade) antes de iniciar a pulverização.";
 
-        if ((fertilizantes / area) > 0.5) {
-            status = "Alerta: Alto uso de insumos químicos.";
-            recomendacao = "Recomendamos a transição parcial para biofertilizantes e a adoção de técnicas de plantio direto para reter nitrogênio no solo.";
+        if (recomendacao > 4.0) {
+            status = "Atenção: Alta concentração de princípio ativo.";
+            recomendacaoTexto = "Dosagem elevada detectada. Certifique-se do uso correto de EPIs por toda a equipe e verifique as condições do solo para evitar escoamento superficial em direção a corpos d'água.";
         }
 
         Map<String, Object> resultado = new HashMap<>();
-        resultado.put("emissoes", String.format("%.2f toneladas de CO₂eq/ano", emissoesCalculadas));
-        resultado.put("creditos", String.format("%.2f tCO₂ passíveis de monetização", potencialCredito));
+        resultado.put("emissoes", String.format("%.1f Litros de defensivo", totalProduto));
+        resultado.put("creditos", String.format("%.0f Litros de água (Média de 150L/ha)", totalAgua));
         resultado.put("status", status);
-        resultado.put("recomendacao", recomendacao);
+        resultado.put("recomendacao", recomendacaoTexto);
 
         return ResponseEntity.ok(resultado);
     }

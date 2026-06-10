@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroSustentável | Futuro Forte e Equilibrado</title>
+    <title>AgroEficaz | Cálculo de Defensivos de Alta Precisão</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -14,11 +14,11 @@
     <!-- Cabeçalho -->
     <header class="navbar">
         <div class="container flex-nav">
-            <div class="logo">Agro<span>Sustentável</span></div>
+            <div class="logo">Agro<span>Eficaz</span></div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#proposito">Nosso Propósito</a></li>
-                    <li><a href="#diagnostico">Diagnóstico Técnico</a></li>
+                    <li><a href="#calculadora">Cálculo de Dosagem</a></li>
                     <li><a href="#beneficios">Benefícios</a></li>
                 </ul>
             </nav>
@@ -28,39 +28,39 @@
     <!-- Seção Principal -->
     <section class="hero" id="proposito">
         <div class="container">
-            <h1>Agro Forte, Futuro Sustentável</h1>
-            <p>O equilíbrio exato entre a máxima produtividade no campo e a preservação do meio ambiente. Tecnologia nacional a serviço da terra.</p>
-            <a href="#diagnostico" class="btn-primary">Iniciar Diagnóstico da Fazenda</a>
+            <h1>Produtividade Forte, Aplicação Precisa</h1>
+            <p>O equilíbrio exato entre a proteção da lavoura e a preservação ambiental. Calcule a dosagem ideal de defensivos para evitar desperdícios e contaminações.</p>
+            <a href="#calculadora" class="btn-primary">Iniciar Cálculo de Área</a>
         </div>
     </section>
 
     <!-- Simulador Técnico -->
-    <section class="diagnostico-section" id="diagnostico">
+    <section class="diagnostico-section" id="calculadora">
         <div class="container">
             <div class="card-diagnostico">
-                <h2>Simulador de Impacto e Balanço de Carbono</h2>
-                <p class="subtitle">Insira os dados operacionais da sua propriedade para gerar um pré-diagnóstico de sustentabilidade.</p>
+                <h2>Simulador de Dosagem de Defensivos</h2>
+                <p class="subtitle">Insira as especificações técnicas da sua área e do produto para obter o volume ideal de calda.</p>
                 
                 <form id="form-agro">
                     <div class="form-group">
-                        <label for="area">Área Total Cultivada (Hectares)</label>
-                        <input type="number" id="area" placeholder="Ex: 500" required>
+                        <label for="area">Área Total de Aplicação (Hectares)</label>
+                        <input type="number" id="area" placeholder="Ex: 150" required>
                     </div>
                     <div class="form-group">
-                        <label for="fertilizantes">Volume de Fertilizantes Nitrogenados (Toneladas/Ano)</label>
-                        <input type="number" id="fertilizantes" placeholder="Ex: 45" required>
+                        <label for="recomendacao">Dosagem Recomendada pelo Fabricante (Litros por Hectare)</label>
+                        <input type="number" step="0.1" id="recomendacao" placeholder="Ex: 2.5" required>
                     </div>
-                    <button type="submit" class="btn-submit">Gerar Relatório Técnico</button>
+                    <button type="submit" class="btn-submit">Calcular Volume Técnico</button>
                 </form>
 
                 <!-- Painel de Resultados -->
                 <div id="painel-resultados" class="resultados-container hidden">
-                    <h3>Resultado da Análise</h3>
+                    <h3>Prescrição de Aplicação</h3>
                     <div class="resultado-grid">
-                        <div class="res-item"><strong>Emissões Estimadas:</strong> <span id="res-emissoes">-</span></div>
-                        <div class="res-item"><strong>Potencial de Crédito:</strong> <span id="res-creditos">-</span></div>
+                        <div class="res-item"><strong>Total de Produto Necessário:</strong> <span id="res-produto">-</span></div>
+                        <div class="res-item"><strong>Volume de Calda Estimado (Água):</strong> <span id="res-agua">-</span></div>
                     </div>
-                    <div class="res-status"><strong>Diagnóstico:</strong> <span id="res-status">-</span></div>
+                    <div class="res-status"><strong>Classificação de Manejo:</strong> <span id="res-status">-</span></div>
                     <p class="res-recomenda" id="res-recomenda">-</p>
                 </div>
             </div>
@@ -70,19 +70,19 @@
     <!-- Pilares de Benefícios -->
     <section class="beneficios" id="beneficios">
         <div class="container">
-            <h2 class="section-title">Por que equilibrar produção e ecologia?</h2>
+            <h2 class="section-title">Por que fazer a aplicação de precisão?</h2>
             <div class="grid-beneficios">
                 <div class="beneficio-card">
-                    <h3>Valorização de Ativos</h3>
-                    <p>Propriedades monitoradas e sustentáveis possuem maior facilidade de acesso a linhas de crédito verde e financiamentos agrícolas internacionais.</p>
+                    <h3>Economia Financeira</h3>
+                    <p>Reduza drasticamente o custo por hectare eliminando superdosagens e desperdícios de produtos químicos de alto custo.</p>
                 </div>
                 <div class="beneficio-card">
-                    <h3>Proteção do Solo</h3>
-                    <p>O manejo biológico reduz o esgotamento dos nutrientes, garantindo que suas terras continuem férteis por múltiplas gerações.</p>
+                    <h3>Segurança Ambiental</h3>
+                    <p>Evite a lixiviação para o lençol freático e proteja os polinizadores locais aplicando estritamente o necessário.</p>
                 </div>
                 <div class="beneficio-card">
-                    <h3>Resiliência Climática</h3>
-                    <p>A conservação de matas ciliares e reserva legal mitiga os efeitos severos de secas prolongadas e quebras de safra.</p>
+                    <h3>Prevenção de Resistência</h3>
+                    <p>A aplicação na dose correta impede que pragas e plantas daninhas desenvolvam resistência biológica aos princípios ativos.</p>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 AgroSustentável. Todos os direitos reservados. Alinhando a força do campo com o futuro do planeta.</p>
+            <p>&copy; 2026 AgroEficaz. Todos os direitos reservados. Alinhando a força do campo com a segurança do planeta.</p>
         </div>
     </footer>
 
@@ -100,35 +100,36 @@
             e.preventDefault();
             
             const area = parseFloat(document.getElementById('area').value);
-            const fertilizantes = parseFloat(document.getElementById('fertilizantes').value);
+            const recomendacao = parseFloat(document.getElementById('recomendacao').value);
 
             // Tenta conectar ao backend Java local. Se falhar, calcula direto no navegador.
             fetch('http://localhost:8080/api/diagnostico/calcular', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ area: area, fertilizantes: fertilizantes })
+                body: JSON.stringify({ area: area, fertilizantes: recomendacao }) // Mantém mapeamento básico
             })
             .then(response => response.json())
             .then(data => exibeResultados(data.emissoes, data.creditos, data.status, data.recomendacao))
             .catch(() => {
-                // Cálculo Alternativo Client-Side para rodar perfeitamente no GitHub Pages
-                const emissoes = ((area * 0.12) + (fertilizantes * 2.4)).toFixed(2) + " toneladas de CO₂eq/ano";
-                const creditos = (area * 1.5).toFixed(2) + " tCO₂ passíveis de monetização";
-                let status = "Equilíbrio Excelente!";
-                let recomendacao = "Sua propriedade cumpre ótimos requisitos ecológicos. Você está apto a aplicar para certificações de créditos de carbono.";
+                // Cálculo Alternativo Client-Side para rodar no GitHub Pages
+                const totalProduto = (area * recomendacao).toFixed(1) + " Litros de defensivo";
+                const totalAgua = (area * 150).toFixed(0) + " Litros de água (Média de 150L/ha)";
+                
+                let status = "Manejo Padrão Seguro";
+                let textoDiretriz = "A quantidade indicada está dentro dos limites sustentáveis de segurança. Monitore as condições climáticas (vento e umidade) antes de iniciar a pulverização.";
 
-                if (fertilizantes / area > 0.5) {
-                    status = "Alerta: Alto uso de insumos químicos.";
-                    recomendacao = "Recomendamos a transição parcial para biofertilizantes e a adoção de técnicas de plantio direto para reter nitrogênio no solo.";
+                if (recomendacao > 4.0) {
+                    status = "Atenção: Alta concentração de princípio ativo.";
+                    textoDiretriz = "Dosagem elevada detectada. Certifique-se do uso correto de EPIs por toda a equipe e verifique as condições do solo para evitar escoamento superficial em direção a corpos d'água.";
                 }
 
-                exibeResultados(emissoes, creditos, status, recomendacao);
+                exibeResultados(totalProduto, totalAgua, status, textoDiretriz);
             });
         });
 
-        function exibeResultados(emissoes, creditos, status, recomendacao) {
-            document.getElementById('res-emissoes').innerText = emissoes;
-            document.getElementById('res-creditos').innerText = creditos;
+        function exibeResultados(produto, agua, status, recomendacao) {
+            document.getElementById('res-produto').innerText = produto;
+            document.getElementById('res-agua').innerText = agua;
             document.getElementById('res-status').innerText = status;
             document.getElementById('res-recomenda').innerText = recomendacao;
             document.getElementById('painel-resultados').classList.remove('hidden');
