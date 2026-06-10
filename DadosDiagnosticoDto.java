@@ -1,18 +1,21 @@
 package com.agro.eficaz.dto;
 
-public class DadosCalculoDto {
+public class RequisicaoCalculoDto {
+    private String tipoDefensivo;
+    private String tipoFormulacao;
     private double area;
-    private double recomendacao;
+    private double dosagem;
 
-    public DadosCalculoDto() {}
+    // Construtores
+    public RequisicaoCalculoDto() {}
 
-    public DadosCalculoDto(double area, double recomendacao) {
-        this.area = area;
-        this.recomendacao = recomendacao;
-    }
-
+    // Getters e Setters
+    public String getTipoDefensivo() { return tipoDefensivo; }
+    public void setTipoDefensivo(String tipoDefensivo) { this.tipoDefensivo = tipoDefensivo; }
+    public String getTipoFormulacao() { return tipoFormulacao; }
+    public void setTipoFormulacao(String tipoFormulacao) { this.tipoFormulacao = tipoFormulacao; }
     public double getArea() { return area; }
     public void setArea(double area) { this.area = area; }
-    public double getRecomendacao() { return recomendacao; }
-    public void setRecomendacao(double recomendacao) { this.recomendacao = recomendacao; }
+    public double getDosagem() { return dosagem; }
+    public void setDosagem(double dosagem) { this.dosagem = dosagem; }
 }
